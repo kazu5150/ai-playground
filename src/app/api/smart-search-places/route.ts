@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+const getOpenAIClient = () => {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is not configured')
+  }
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  })
+}
 
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY
 
@@ -35,6 +40,7 @@ export async function POST(request: NextRequest) {
     console.log('AIスマート検索開始:', query)
 
     // OpenAI GPTを使って検索クエリを最適化
+    const openai = getOpenAIClient()
     const aiResponse = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
