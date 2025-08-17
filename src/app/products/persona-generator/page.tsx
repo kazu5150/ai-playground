@@ -157,7 +157,7 @@ export default function PersonaGenerator() {
           <ul className="mt-2 space-y-1">
             {strategy.ad_copies.map((copy, index) => (
               <li key={index} className="text-gray-700 bg-white rounded p-2 border-l-4 border-purple-400">
-                "{copy}"
+                &quot;{copy}&quot;
               </li>
             ))}
           </ul>

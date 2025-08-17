@@ -82,7 +82,9 @@ export default function VoiceChat() {
 
             {/* ElevenLabsウィジェット */}
             <div className="flex justify-center">
-              <elevenlabs-convai agent-id="AYSyQK5I8g1u6sN9vWja"></elevenlabs-convai>
+              <div dangerouslySetInnerHTML={{
+                __html: '<elevenlabs-convai agent-id="AYSyQK5I8g1u6sN9vWja"></elevenlabs-convai>'
+              }} />
             </div>
           </div>
 
