@@ -37,6 +37,16 @@ const sampleProducts: Product[] = [
     isNew: true
   },
   {
+    id: 'persona-generator',
+    title: 'AI ペルソナ生成 & マーケティング戦略ツール',
+    description: 'サービス情報を入力するだけで、AIが日本市場向けの現実的なペルソナを3つ自動生成し、各ペルソナに最適なマーケティング施策も提案します。',
+    category: 'マーケティング',
+    tags: ['ペルソナ', 'マーケティング戦略', 'ターゲット分析', 'GPT-4'],
+    author: 'AI Playground',
+    createdAt: '2024-08-17',
+    isNew: true
+  },
+  {
     id: '1',
     title: 'AIチャットボット',
     description: '自然言語処理を活用した高度な対話システム。カスタマーサポートや個人アシスタントとして活用できます。',
@@ -94,7 +104,7 @@ const sampleProducts: Product[] = [
   }
 ]
 
-const categories = ['すべて', '音声AI', 'ウェブ分析', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
+const categories = ['すべて', '音声AI', 'ウェブ分析', 'マーケティング', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
 
 export default function ProductGrid() {
   const [selectedCategory, setSelectedCategory] = useState('すべて')
