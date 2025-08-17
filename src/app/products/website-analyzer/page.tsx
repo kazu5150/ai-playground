@@ -143,16 +143,77 @@ export default function WebsiteAnalyzer() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ヘッダー */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            ウェブサイト分析ツール
-          </h1>
-          <p className="text-lg text-gray-600">
-            あなたのウェブサイトを自動で分析し、改善点をAIが提案します
-          </p>
+    <div className="min-h-screen bg-slate-200">
+      {/* ヒーローセクション */}
+      <section className="bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* ホームに戻るボタン */}
+          <div className="mb-8">
+            <a 
+              href="/" 
+              className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
+            >
+              <svg 
+                className="w-5 h-5 mr-2" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+                />
+              </svg>
+              ホームに戻る
+            </a>
+          </div>
+          
+          {/* ヘッダー */}
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              ランディングページ分析
+              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                ツール
+              </span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              あなたのランディングページを辛口で分析し、コンバージョン率向上のための改善点をAIが提案します
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* 辛口検証の警告メッセージ */}
+        <div className="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-400 p-6 mb-8 rounded-r-lg">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <svg className="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-lg font-semibold text-red-800 mb-2">
+                🔥 辛口検証モード
+              </h3>
+              <div className="text-red-700 space-y-2">
+                <p className="font-medium">
+                  このツールは<strong>厳しい基準</strong>でランディングページを評価します。
+                </p>
+                <ul className="text-sm space-y-1 list-disc list-inside">
+                  <li>コンバージョン率向上の観点から厳格に分析</li>
+                  <li>デザイン・コピー・UXの改善点を容赦なく指摘</li>
+                  <li>売上向上につながる具体的な改善提案を提供</li>
+                </ul>
+                <p className="text-sm bg-red-100 p-2 rounded border border-red-200 mt-3">
+                  💡 <strong>建設的な批判</strong>として受け取り、LP改善の参考にしてください
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 入力フォーム */}
@@ -160,14 +221,14 @@ export default function WebsiteAnalyzer() {
           <div className="space-y-4">
             <div>
               <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
-                ウェブサイトURL
+                ランディングページURL
               </label>
               <input
                 type="url"
                 id="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://example.com"
+                placeholder="https://yourlandingpage.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 disabled={isAnalyzing}
               />
@@ -193,7 +254,7 @@ export default function WebsiteAnalyzer() {
                   分析中...
                 </div>
               ) : (
-                'ウェブサイトを分析'
+                'ランディングページを分析'
               )}
             </button>
           </div>
@@ -330,11 +391,33 @@ export default function WebsiteAnalyzer() {
                             {children}
                           </h3>
                         ),
-                        p: ({ children }) => (
-                          <p className="text-gray-700 leading-relaxed mb-4">
-                            {children}
-                          </p>
-                        ),
+                        p: ({ children }) => {
+                          // 段落内のツッコミポイントも検出
+                          const content = String(children);
+                          const criticalPatterns = [
+                            /問題点|改善が必要|不適切|欠如|不十分|課題|エラー|警告|注意|危険|重要|必須|緊急/,
+                            /ダメ|悪い|最悪|ひどい|残念|失敗|間違い|誤り|不正|違反/,
+                            /遅い|重い|非効率|無駄|冗長|複雑|困難|不便|使いにくい/
+                          ];
+                          
+                          const hasCriticalContent = criticalPatterns.some(pattern => pattern.test(content));
+                          
+                          if (hasCriticalContent) {
+                            return (
+                              <div className="mb-4 p-3 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-lg">
+                                <p className="text-red-800 leading-relaxed font-medium">
+                                  🎯 {children}
+                                </p>
+                              </div>
+                            );
+                          }
+                          
+                          return (
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              {children}
+                            </p>
+                          );
+                        },
                         ul: ({ children }) => (
                           <ul className="list-disc list-inside space-y-2 mb-4 ml-4">
                             {children}
@@ -345,16 +428,56 @@ export default function WebsiteAnalyzer() {
                             {children}
                           </ol>
                         ),
-                        li: ({ children }) => (
-                          <li className="text-gray-700 leading-relaxed">
-                            {children}
-                          </li>
-                        ),
-                        strong: ({ children }) => (
-                          <strong className="font-semibold text-gray-900">
-                            {children}
-                          </strong>
-                        ),
+                        li: ({ children }) => {
+                          // ツッコミポイントのパターンを検出
+                          const content = String(children);
+                          const criticalPatterns = [
+                            /問題点|改善が必要|不適切|欠如|不十分|課題|エラー|警告|注意|危険|重要|必須|緊急/,
+                            /ダメ|悪い|最悪|ひどい|残念|失敗|間違い|誤り|不正|違反/,
+                            /遅い|重い|非効率|無駄|冗長|複雑|困難|不便|使いにくい/
+                          ];
+                          
+                          const isCritical = criticalPatterns.some(pattern => pattern.test(content));
+                          
+                          if (isCritical) {
+                            return (
+                              <li className="text-gray-700 leading-relaxed p-2 bg-red-50 border-l-4 border-red-400 rounded-r mb-2">
+                                <span className="font-bold text-red-700">🔥 {children}</span>
+                              </li>
+                            );
+                          }
+                          
+                          return (
+                            <li className="text-gray-700 leading-relaxed">
+                              {children}
+                            </li>
+                          );
+                        },
+                        strong: ({ children }) => {
+                          // 強調テキスト内のツッコミポイントを検出
+                          const content = String(children);
+                          const criticalPatterns = [
+                            /問題|改善|不適切|欠如|不十分|課題|エラー|警告|注意|危険|重要|必須|緊急/,
+                            /ダメ|悪い|最悪|ひどい|残念|失敗|間違い|誤り|不正|違反/,
+                            /遅い|重い|非効率|無駄|冗長|複雑|困難|不便|使いにくい/
+                          ];
+                          
+                          const isCritical = criticalPatterns.some(pattern => pattern.test(content));
+                          
+                          if (isCritical) {
+                            return (
+                              <strong className="font-bold text-red-600 bg-red-100 px-1 rounded">
+                                {children}
+                              </strong>
+                            );
+                          }
+                          
+                          return (
+                            <strong className="font-semibold text-gray-900">
+                              {children}
+                            </strong>
+                          );
+                        },
                         em: ({ children }) => (
                           <em className="italic text-gray-600">
                             {children}

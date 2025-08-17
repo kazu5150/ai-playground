@@ -39,17 +39,49 @@ export default function VoiceChat() {
         <meta name="description" content="ElevenLabsの最先端AI音声技術で自然な会話を体験してください" />
       </Head>
       
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* ヘッダー */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              AI音声会話エージェント
-            </h1>
-            <p className="text-lg text-gray-600">
-              ElevenLabsの最先端AI音声技術で、自然な音声会話を体験してください
-            </p>
+      <div className="min-h-screen bg-slate-200">
+        {/* ヒーローセクション */}
+        <section className="bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 py-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* ホームに戻るボタン */}
+            <div className="mb-8">
+              <a 
+                href="/" 
+                className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
+              >
+                <svg 
+                  className="w-5 h-5 mr-2" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+                  />
+                </svg>
+                ホームに戻る
+              </a>
+            </div>
+            
+            {/* ヘッダー */}
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                AI音声会話
+                <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                  エージェント
+                </span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                ElevenLabsの最先端AI音声技術で、自然な音声会話を体験してください
+              </p>
+            </div>
           </div>
+        </section>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
           {/* 会話エージェント */}
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">

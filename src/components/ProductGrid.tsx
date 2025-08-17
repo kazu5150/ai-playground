@@ -28,10 +28,10 @@ const sampleProducts: Product[] = [
   },
   {
     id: 'website-analyzer',
-    title: 'ウェブサイト分析ツール',
-    description: 'あなたのウェブサイトを自動で分析し、改善点をAIが提案します。SEO、パフォーマンス、ユーザビリティを総合的に評価。',
+    title: 'ランディングページ分析ツール',
+    description: 'あなたのランディングページを辛口で分析し、コンバージョン率向上のための改善点をAIが提案します。デザイン、コピー、UXを徹底的に評価。',
     category: 'ウェブ分析',
-    tags: ['SEO', 'パフォーマンス', 'UX評価', 'AI分析'],
+    tags: ['ランディングページ', 'コンバージョン率', 'UX評価', 'AI分析'],
     author: 'AI Playground',
     createdAt: '2024-08-17',
     isNew: true
@@ -51,7 +51,7 @@ const sampleProducts: Product[] = [
     title: 'AI場所検索ツール',
     description: 'Google Places APIを使って、欲しい条件の場所を簡単に検索。レストラン、カフェ、観光地など、自然言語で検索できます。',
     category: '検索・情報',
-    tags: ['Google Places API', '場所検索', '地図', 'リアルタイム'],
+    tags: ['Google Places API', '場所検索', '地図', 'リアルタイム', 'マーケティング'],
     author: 'AI Playground',
     createdAt: '2024-08-17',
     isNew: true
@@ -121,7 +121,9 @@ export default function ProductGrid() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredProducts = sampleProducts.filter(product => {
-    const matchesCategory = selectedCategory === 'すべて' || product.category === selectedCategory
+    const matchesCategory = selectedCategory === 'すべて' || 
+                           product.category === selectedCategory ||
+                           product.tags.includes(selectedCategory)
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -129,13 +131,13 @@ export default function ProductGrid() {
   })
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-slate-800 mb-4">
             AIプロダクト一覧
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-slate-600">
             様々なAIプロダクトを探索し、あなたのニーズに合ったツールを見つけましょう
           </p>
         </div>
@@ -149,7 +151,7 @@ export default function ProductGrid() {
                 placeholder="プロダクトを検索..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white"
               />
             </div>
           </div>
@@ -161,8 +163,8 @@ export default function ProductGrid() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? 'bg-slate-800 text-white shadow-lg'
+                    : 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50'
                 }`}
               >
                 {category}
@@ -180,7 +182,7 @@ export default function ProductGrid() {
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">
+            <p className="text-slate-500 text-lg">
               検索条件に一致するプロダクトが見つかりませんでした。
             </p>
           </div>
