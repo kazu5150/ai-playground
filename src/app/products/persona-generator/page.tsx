@@ -53,6 +53,30 @@ interface MarketingResult {
   "Persona C": MarketingStrategy
 }
 
+// サンプルデータ
+const sampleServices = [
+  {
+    name: "スマート体重計 HealthTracker Pro",
+    description: "Wi-Fi接続機能付きのスマート体重計。体重、体脂肪率、筋肉量、BMI、基礎代謝などを測定し、専用アプリで健康データを管理できます。家族全員のデータを個別に記録し、目標設定や進捗管理もサポート。月額980円で栄養士による食事アドバイスも受けられます。"
+  },
+  {
+    name: "オンライン英会話 SpeakUp",
+    description: "ネイティブ講師とのマンツーマンオンライン英会話サービス。24時間いつでも予約可能で、ビジネス英語、日常英会話、TOEIC対策など多様なコースを提供。月額6,980円で毎日25分のレッスンが受講でき、AI音声認識による発音チェック機能も搭載。"
+  },
+  {
+    name: "ペット見守りカメラ PetWatch360",
+    description: "外出先からペットの様子を確認できる360度回転カメラ。自動追跡機能でペットの動きを追い、異常行動を検知した際にはスマホに通知。双方向音声通話機能でペットとのコミュニケーションも可能。月額580円のクラウド録画サービスで1週間分の映像を保存。"
+  },
+  {
+    name: "家事代行マッチング ClenHelper",
+    description: "信頼できる家事代行スタッフとのマッチングプラットフォーム。掃除、洗濯、料理、買い物など様々な家事を1時間2,500円から依頼可能。全スタッフは身元確認と技能テスト済み。専用アプリで簡単予約・決済、作業レポートも確認できます。"
+  },
+  {
+    name: "睡眠改善アプリ SleepBetter",
+    description: "科学的根拠に基づいた睡眠改善プログラムを提供するアプリ。スマートウォッチと連携して睡眠の質を分析し、個人に最適化された改善提案を実施。瞑想音声、ホワイトノイズ、睡眠導入音楽も搭載。プレミアム版（月額1,480円）では睡眠専門医による個別相談も利用可能。"
+  }
+]
+
 export default function PersonaGenerator() {
   const [serviceName, setServiceName] = useState('')
   const [serviceDescription, setServiceDescription] = useState('')
@@ -66,6 +90,15 @@ export default function PersonaGenerator() {
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  const loadSample = (index: number) => {
+    const sample = sampleServices[index]
+    setServiceName(sample.name)
+    setServiceDescription(sample.description)
+    setError('')
+    setResult(null)
+    setMarketingStrategies(null)
+  }
 
   const generatePersonas = async () => {
     if (!serviceName.trim() || !serviceDescription.trim()) {
@@ -355,6 +388,30 @@ export default function PersonaGenerator() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                   disabled={isGenerating}
                 />
+              </div>
+              
+              {/* サンプル選択ボタン */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  サンプルを試す（ワンクリックで入力）
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {sampleServices.map((sample, index) => (
+                    <button
+                      key={index}
+                      onClick={() => loadSample(index)}
+                      disabled={isGenerating}
+                      className="p-3 text-left border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <div className="font-medium text-sm text-gray-900 mb-1">
+                        {sample.name}
+                      </div>
+                      <div className="text-xs text-gray-600 line-clamp-2">
+                        {sample.description.substring(0, 60)}...
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
               
               {error && (
