@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 
 interface AnalysisResult {
@@ -11,11 +12,6 @@ interface AnalysisResult {
   fullAnalysis?: string
 }
 
-interface AnalysisSection {
-  title: string
-  content: string[]
-  type: 'info' | 'positive' | 'negative' | 'neutral'
-}
 
 export default function WebsiteAnalyzer() {
   const [url, setUrl] = useState('')
@@ -65,82 +61,11 @@ export default function WebsiteAnalyzer() {
     try {
       new URL(string)
       return true
-    } catch (_) {
+    } catch {
       return false
     }
   }
 
-  const parseAnalysisText = (text: string): AnalysisSection[] => {
-    if (!text) return []
-    
-    const sections: AnalysisSection[] = []
-    const lines = text.split('\n').filter(line => line.trim())
-    
-    let currentSection: AnalysisSection | null = null
-    
-    lines.forEach(line => {
-      const trimmedLine = line.trim()
-      
-      // セクションヘッダーを検出
-      if (trimmedLine.match(/^#+\s*(.+)$/) || 
-          trimmedLine.match(/^【(.+)】$/) ||
-          trimmedLine.match(/^\*\*(.+)\*\*$/) ||
-          trimmedLine.includes('##') ||
-          trimmedLine.includes('分析') ||
-          trimmedLine.includes('評価') ||
-          trimmedLine.includes('推奨') ||
-          trimmedLine.includes('改善') ||
-          trimmedLine.includes('強み') ||
-          trimmedLine.includes('課題')) {
-        
-        // 前のセクションを保存
-        if (currentSection) {
-          sections.push(currentSection)
-        }
-        
-        // 新しいセクションを開始
-        const title = trimmedLine.replace(/^#+\s*/, '').replace(/^【|】$/g, '').replace(/^\*\*|\*\*$/g, '')
-        const type = getSectonType(title)
-        currentSection = {
-          title,
-          content: [],
-          type
-        }
-      } else if (currentSection && trimmedLine) {
-        // セクション内容を追加
-        if (trimmedLine.match(/^\d+[\.\)]\s*(.+)$/) || 
-            trimmedLine.match(/^[-\*\+]\s*(.+)$/) ||
-            trimmedLine.length > 10) {
-          currentSection.content.push(trimmedLine)
-        }
-      } else if (!currentSection && trimmedLine) {
-        // 最初のセクション（タイトルなし）
-        if (!sections.some(s => s.title === '概要')) {
-          currentSection = {
-            title: '概要',
-            content: [trimmedLine],
-            type: 'info'
-          }
-        }
-      }
-    })
-    
-    // 最後のセクションを追加
-    if (currentSection) {
-      sections.push(currentSection)
-    }
-    
-    return sections
-  }
-  
-  const getSectonType = (title: string): 'info' | 'positive' | 'negative' | 'neutral' => {
-    const positiveWords = ['強み', '良い', '優秀', '素晴らしい', 'メリット', '成功']
-    const negativeWords = ['改善', '課題', '問題', '弱み', 'デメリット', '修正']
-    
-    if (positiveWords.some(word => title.includes(word))) return 'positive'
-    if (negativeWords.some(word => title.includes(word))) return 'negative'
-    return 'neutral'
-  }
 
   return (
     <div className="min-h-screen bg-slate-200">
@@ -149,7 +74,7 @@ export default function WebsiteAnalyzer() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* ホームに戻るボタン */}
           <div className="mb-8">
-            <a 
+            <Link 
               href="/" 
               className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
             >
@@ -167,7 +92,7 @@ export default function WebsiteAnalyzer() {
                 />
               </svg>
               ホームに戻る
-            </a>
+            </Link>
           </div>
           
           {/* ヘッダー */}

@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     let optimizationResult
     try {
       optimizationResult = JSON.parse(aiContent)
-    } catch (parseError) {
+    } catch {
       console.error('AI応答のパース失敗:', aiContent)
       // パースに失敗した場合は元のクエリを使用
       optimizationResult = {

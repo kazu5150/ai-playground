@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 interface Persona {
   name: string
@@ -349,7 +350,7 @@ export default function PersonaGenerator() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* ホームに戻るボタン */}
             <div className="mb-8">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
               >
@@ -367,7 +368,7 @@ export default function PersonaGenerator() {
                   />
                 </svg>
                 ホームに戻る
-              </a>
+              </Link>
             </div>
             
             {/* ヘッダー */}

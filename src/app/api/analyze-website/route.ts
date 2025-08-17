@@ -37,7 +37,7 @@ function parseAnalysisOutput(text: string): { strengths: string[], improvements:
   const lines = text.split('\n')
   let isInRecommendationSection = false
   
-  lines.forEach((line, index) => {
+  lines.forEach((line) => {
     // 推奨事項セクションの開始を検出
     if (line.includes('推奨事項') || line.includes('アイデア') || line.includes('改善') || line.match(/^\d+\)/)) {
       isInRecommendationSection = true
@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
     // URLの基本的なバリデーション
     try {
       new URL(url)
-    } catch (error) {
+    } catch {
       return NextResponse.json(
         { error: '無効なURLです' },
         { status: 400 }

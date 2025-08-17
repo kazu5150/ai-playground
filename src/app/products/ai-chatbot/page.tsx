@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 interface Message {
   id: string
@@ -104,7 +105,7 @@ export default function AIChatbot() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* ホームに戻るボタン */}
             <div className="mb-8">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
               >
@@ -122,7 +123,7 @@ export default function AIChatbot() {
                   />
                 </svg>
                 ホームに戻る
-              </a>
+              </Link>
             </div>
             
             {/* ヘッダー */}

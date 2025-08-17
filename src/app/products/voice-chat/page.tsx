@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function VoiceChat() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -45,7 +46,7 @@ export default function VoiceChat() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* ホームに戻るボタン */}
             <div className="mb-8">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-slate-300 hover:text-white transition-colors"
               >
@@ -63,7 +64,7 @@ export default function VoiceChat() {
                   />
                 </svg>
                 ホームに戻る
-              </a>
+              </Link>
             </div>
             
             {/* ヘッダー */}
