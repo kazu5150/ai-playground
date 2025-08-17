@@ -304,7 +304,7 @@ export default function PlaceFinder() {
                     ? "例: デートにおすすめの場所、友達と遊べる場所、一人で勉強できる場所" 
                     : "例: 美味しいラーメン屋、おしゃれなカフェ、24時間営業のコンビニ"
                   }
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-black placeholder-gray-400"
                   disabled={isSearching}
                 />
               </div>
@@ -320,7 +320,7 @@ export default function PlaceFinder() {
                   onChange={(e) => setLocation(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="例: 東京、渋谷、新宿駅周辺"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-black placeholder-gray-400"
                   disabled={isSearching}
                 />
               </div>
