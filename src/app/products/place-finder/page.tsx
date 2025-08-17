@@ -168,8 +168,9 @@ export default function PlaceFinder() {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !isSearching) {
-      searchPlaces()
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      // Enterキーでは自動検索しない - ボタンクリックのみで検索実行
     }
   }
 
