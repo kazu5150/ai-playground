@@ -145,7 +145,7 @@ export default function WebsiteAnalyzer() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="space-y-4">
             <div>
-              <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="url" className="block text-lg font-bold text-gray-700 mb-2">
                 ランディングページURL
               </label>
               <input

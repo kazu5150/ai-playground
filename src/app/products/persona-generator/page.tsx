@@ -392,7 +392,7 @@ export default function PersonaGenerator() {
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
             <div className="space-y-6">
               <div>
-                <label htmlFor="serviceName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="serviceName" className="block text-lg font-bold text-gray-700 mb-2">
                   サービス名 <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -408,7 +408,7 @@ export default function PersonaGenerator() {
               </div>
               
               <div>
-                <label htmlFor="serviceDescription" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="serviceDescription" className="block text-lg font-bold text-gray-700 mb-2">
                   サービス概要 <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -425,7 +425,7 @@ export default function PersonaGenerator() {
               
               {/* サンプル選択ボタン */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-lg font-bold text-gray-700 mb-3">
                   サンプルを試す（ワンクリックで入力）
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
