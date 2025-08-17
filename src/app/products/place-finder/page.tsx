@@ -278,7 +278,7 @@ export default function PlaceFinder() {
                     onChange={(e) => setSearchMode(e.target.value as 'normal' | 'smart')}
                     className="mr-2"
                   />
-                  <span className="text-base font-semibold">
+                  <span className="text-base font-semibold text-slate-800">
                     🔍 通常検索
                   </span>
                 </label>
