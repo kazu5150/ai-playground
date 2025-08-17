@@ -17,6 +17,16 @@ interface Product {
 
 const sampleProducts: Product[] = [
   {
+    id: 'voice-chat',
+    title: 'AI音声会話エージェント',
+    description: 'ElevenLabsの最先端AI音声技術を使った自然な音声会話体験。リアルタイムで応答する知能的なエージェントと話してみましょう。',
+    category: '音声AI',
+    tags: ['ElevenLabs', '音声合成', 'リアルタイム', '自然言語'],
+    author: 'AI Playground',
+    createdAt: '2024-08-17',
+    isNew: true
+  },
+  {
     id: 'website-analyzer',
     title: 'ウェブサイト分析ツール',
     description: 'あなたのウェブサイトを自動で分析し、改善点をAIが提案します。SEO、パフォーマンス、ユーザビリティを総合的に評価。',
@@ -84,7 +94,7 @@ const sampleProducts: Product[] = [
   }
 ]
 
-const categories = ['すべて', 'ウェブ分析', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
+const categories = ['すべて', '音声AI', 'ウェブ分析', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
 
 export default function ProductGrid() {
   const [selectedCategory, setSelectedCategory] = useState('すべて')

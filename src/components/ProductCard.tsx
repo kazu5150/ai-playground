@@ -67,7 +67,13 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="mt-4 pt-4 border-t border-gray-100">
-        {product.id === 'website-analyzer' ? (
+        {product.id === 'voice-chat' ? (
+          <Link href="/products/voice-chat" className="block w-full">
+            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+              試してみる
+            </button>
+          </Link>
+        ) : product.id === 'website-analyzer' ? (
           <Link href="/products/website-analyzer" className="block w-full">
             <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
               試してみる
