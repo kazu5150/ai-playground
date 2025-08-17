@@ -18,6 +18,8 @@ export default function WebsiteAnalyzer() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState('')
+  const [progress, setProgress] = useState(0)
+  const [currentStep, setCurrentStep] = useState('')
 
   const analyzeWebsite = async () => {
     if (!url) {
@@ -33,6 +35,39 @@ export default function WebsiteAnalyzer() {
     setIsAnalyzing(true)
     setError('')
     setResult(null)
+    setProgress(0)
+    setCurrentStep('ウェブサイトにアクセス中...')
+
+    // プログレスバーのシミュレーション
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev < 90) {
+          return prev + Math.random() * 10
+        }
+        return prev
+      })
+    }, 2000)
+
+    // ステップメッセージの更新
+    const stepMessages = [
+      'ウェブサイトにアクセス中...',
+      'ページ内容を取得中...',
+      'デザインを分析中...',
+      'コンテンツを評価中...',
+      'UX/UIをチェック中...',
+      'SEO要素を確認中...',
+      'パフォーマンスを測定中...',
+      '改善提案を生成中...',
+      '最終レポートを作成中...'
+    ]
+
+    let stepIndex = 0
+    const stepInterval = setInterval(() => {
+      if (stepIndex < stepMessages.length - 1) {
+        stepIndex++
+        setCurrentStep(stepMessages[stepIndex])
+      }
+    }, 6000)
 
     try {
       const response = await fetch('/api/analyze-website', {
@@ -48,12 +83,27 @@ export default function WebsiteAnalyzer() {
       }
 
       const data = await response.json()
-      setResult(data)
+      
+      // 完了時にプログレスを100%に
+      setProgress(100)
+      setCurrentStep('分析完了！')
+      
+      // 少し待ってから結果を表示
+      setTimeout(() => {
+        setResult(data)
+      }, 500)
+      
     } catch (err) {
       setError('分析中にエラーが発生しました。もう一度お試しください。')
       console.error('Analysis error:', err)
     } finally {
-      setIsAnalyzing(false)
+      clearInterval(progressInterval)
+      clearInterval(stepInterval)
+      setTimeout(() => {
+        setIsAnalyzing(false)
+        setProgress(0)
+        setCurrentStep('')
+      }, 1000)
     }
   }
 
@@ -184,6 +234,56 @@ export default function WebsiteAnalyzer() {
             </button>
           </div>
         </div>
+
+        {/* 詳細ローディング状態 */}
+        {isAnalyzing && (
+          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+            <div className="text-center">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="animate-spin h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">AI分析実行中</h3>
+                <p className="text-gray-600 mb-4">{currentStep}</p>
+              </div>
+
+              {/* プログレスバー */}
+              <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                <div 
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `${Math.min(progress, 100)}%` }}
+                ></div>
+              </div>
+              <div className="flex justify-between text-sm text-gray-500 mb-6">
+                <span>開始</span>
+                <span className="font-medium">{Math.round(progress)}% 完了</span>
+                <span>完了</span>
+              </div>
+
+              {/* 予想時間とヒント */}
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <div className="flex items-center justify-center mb-3">
+                  <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-blue-700 font-medium">予想完了時間: 約30-60秒</span>
+                </div>
+                <div className="text-sm text-blue-600 space-y-2">
+                  <p>💡 <strong>分析のポイント:</strong></p>
+                  <ul className="text-left space-y-1 max-w-md mx-auto">
+                    <li>• デザインの一貫性とブランディング</li>
+                    <li>• コンバージョン要素の配置と効果</li>
+                    <li>• ユーザビリティとナビゲーション</li>
+                    <li>• ページ読み込み速度とSEO対策</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 分析結果 */}
         {result && (
