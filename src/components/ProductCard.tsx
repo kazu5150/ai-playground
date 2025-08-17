@@ -85,6 +85,12 @@ export default function ProductCard({ product }: ProductCardProps) {
               試してみる
             </button>
           </Link>
+        ) : product.id === 'place-finder' ? (
+          <Link href="/products/place-finder" className="block w-full">
+            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+              試してみる
+            </button>
+          </Link>
         ) : product.id === '1' ? (
           <Link href="/products/ai-chatbot" className="block w-full">
             <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">

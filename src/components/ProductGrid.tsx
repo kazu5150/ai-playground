@@ -47,6 +47,16 @@ const sampleProducts: Product[] = [
     isNew: true
   },
   {
+    id: 'place-finder',
+    title: 'AI場所検索ツール',
+    description: 'Google Places APIを使って、欲しい条件の場所を簡単に検索。レストラン、カフェ、観光地など、自然言語で検索できます。',
+    category: '検索・情報',
+    tags: ['Google Places API', '場所検索', '地図', 'リアルタイム'],
+    author: 'AI Playground',
+    createdAt: '2024-08-17',
+    isNew: true
+  },
+  {
     id: '1',
     title: 'AIチャットボット',
     description: '自然言語処理を活用した高度な対話システム。カスタマーサポートや個人アシスタントとして活用できます。',
@@ -104,7 +114,7 @@ const sampleProducts: Product[] = [
   }
 ]
 
-const categories = ['すべて', '音声AI', 'ウェブ分析', 'マーケティング', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
+const categories = ['すべて', '音声AI', 'ウェブ分析', 'マーケティング', '検索・情報', 'チャット', '画像生成', '音声認識', 'データ分析', 'コード生成', 'ライティング']
 
 export default function ProductGrid() {
   const [selectedCategory, setSelectedCategory] = useState('すべて')
