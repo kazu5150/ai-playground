@@ -402,7 +402,7 @@ export default function PersonaGenerator() {
                   onChange={(e) => setServiceName(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="例: スマート体重計 HealthTracker Pro"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-400"
                   disabled={isGenerating}
                 />
               </div>
@@ -418,7 +418,7 @@ export default function PersonaGenerator() {
                   onKeyDown={handleKeyDown}
                   placeholder="例: WiFi接続、スマホアプリ連携で体重/体脂肪率/筋肉量を記録・分析。健康管理を継続したい人向けのIoTデバイス。価格帯は約1万円。"
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-black placeholder-gray-400"
                   disabled={isGenerating}
                 />
               </div>
